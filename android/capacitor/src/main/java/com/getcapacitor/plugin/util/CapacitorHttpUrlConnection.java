@@ -192,7 +192,16 @@ public class CapacitorHttpUrlConnection implements ICapacitorHttpUrlConnection {
                 dataString = call.getString("data");
             }
             this.writeRequestBody(dataString != null ? dataString : "");
-        } else {
+        } else if (contentType.contains("application/octet-stream")){
+
+            // When receiving you are parsing the binary to B64, no reason why this wouldn't work on the sending side as well
+
+            try (DataOutputStream os = new DataOutputStream(connection.getOutputStream())) {
+                os.write(Base64.decode(call.getString("data"), Base64.DEFAULT));
+                os.flush();
+            }
+
+        }else {
             this.writeRequestBody(body.toString());
         }
     }
