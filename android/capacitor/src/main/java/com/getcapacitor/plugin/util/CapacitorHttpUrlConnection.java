@@ -3,6 +3,7 @@ package com.getcapacitor.plugin.util;
 import android.os.Build;
 import android.os.LocaleList;
 import android.text.TextUtils;
+import android.util.Base64;
 import com.getcapacitor.Bridge;
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
